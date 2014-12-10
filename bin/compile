@@ -10,6 +10,10 @@ set -e
 # Clean up leaking environment
 unset GIT_DIR
 
+# Setup profile file
+PROFILE_PATH="$BUILD_DIR/.profile.d/geo.sh"
+mkdir -p $(dirname $PROFILE_PATH)
+
 # Functions
 function indent() {
   c='s/^/       /'
