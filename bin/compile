@@ -5,7 +5,7 @@
 set -e
 
 # Debug
-set -x
+# set -x
 
 # Clean up leaking environment
 unset GIT_DIR
@@ -31,6 +31,7 @@ function indent() {
 }
 
 function manifest_version() {
+  echo "Downloading from http://${S3_BUCKET}.s3.amazonaws.com/${STACK}/manifest.${1} ..."
   curl "http://${S3_BUCKET}.s3.amazonaws.com/${STACK}/manifest.${1}" -s -o - | head -n 1
 }
 
@@ -41,6 +42,7 @@ function download_package() {
 
   mkdir -p $location
   package="https://${S3_BUCKET}.s3.amazonaws.com/${STACK}/$name-$version.tgz"
+  echo "Downloading from $package ..."
   curl $package -s -o - | tar xzf - -C $location
 }
 
